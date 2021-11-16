@@ -5,7 +5,7 @@ steps:
   - label: ':hammer: Build Libraries'
     key: build
     agents:
-      queue: v1
+      queue: dev
     commands:
       - npm config set "//registry.npmjs.org/:_authToken" $${NPM_TOKEN}
       - make ci
@@ -18,7 +18,7 @@ steps:
   - label: ':hammer: QA'
     key: qa
     agents:
-      queue: v1
+      queue: dev
     commands:
       - npm config set "//registry.npmjs.org/:_authToken" $${NPM_TOKEN}
       - yarn install
@@ -32,14 +32,14 @@ steps:
 
   - label: ':lock: Snyk'
     agents:
-      queue: v1
+      queue: dev
     command: 'bk-snyk'
 
   # Auto deploys branches
   - label: ':rocket: Release Branch'
     branches: '!master !v*'
     agents:
-      queue: v1
+      queue: dev
     commands:
       - npm config set "//registry.npmjs.org/:_authToken" $${NPM_TOKEN}
       - yarn install
@@ -55,7 +55,7 @@ steps:
     depends_on: [build]
     branches: 'v*'
     agents:
-      queue: v1
+      queue: dev
     commands:
       - npm config set "//registry.npmjs.org/:_authToken" $${NPM_TOKEN}
       - yarn install
