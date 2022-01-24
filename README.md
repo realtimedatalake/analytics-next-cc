@@ -1,3 +1,35 @@
+# rtdl-next-cc - Analytics Next (aka Analytics.js 2.0) Carbon Copy
+
+This is a fork of Analytics Next (aka Analytics.js 2.0) made to enable carbon copying (cc-ing) an additional endpoint as well as turning off the send to Segment and only sending to the cc endpoint.
+
+## Changed Files
+
+- Updated `/src/analytics.ts`
+- Updated `/src/plugins/segmentio/index.ts`
+- Updated `/.eslintrc` -- ignored `/analytics.min.js`
+- Added `/analytics.min.js`
+
+## How to Build
+
+1.  Switch to NPM version 14/fermium (install lts/fermium first if necessary).
+    `% nvm use lts/fermium`
+2.  Install NPM dependencies.
+    `% make node_modules`
+3.  Test updates on a local dev environment.
+    `% make dev`
+    Go to [http://localhost:3000/](http://localhost:3000/) in your web browser to test your updats.
+4.  Clean and build.
+    ```
+    % make clean
+    rm -rf dist generated
+    % make build-prod
+    ...
+    ```
+5.  Copy the minified standalone file to repo root
+    `% cp ./dist/umd/standalone.js ./analytics.min.js`
+
+---
+
 # Analytics Next
 
 Analytics Next (aka Analytics 2.0) is the latest version of Segment’s JavaScript SDK - enabling you to send your data to any tool without having to learn, test, or use a new API every time.
@@ -29,7 +61,7 @@ The easiest and quickest way to get started with Analytics 2.0 is to [use it thr
 1. Install the package
 
 ```sh
-# npm 
+# npm
 npm install @segment/analytics-next
 
 # yarn
@@ -87,7 +119,7 @@ export default App
 
 ### using `Vite` with `Vue 3`
 
-1. add to your `index.html` 
+1. add to your `index.html`
 
 ```html
 <script>
@@ -121,10 +153,9 @@ export const useSegment = () => {
     analytics,
   })
 }
-
 ```
 
-3. in component 
+3. in component
 
 ```vue
 <template>
@@ -138,20 +169,18 @@ import { useSegment } from './services/segment'
 export default defineComponent({
   setup() {
     const { analytics } = useSegment()
-    
-    function track() { 
+
+    function track() {
       analytics?.track('Hello world')
     }
-    
+
     return {
-      track
+      track,
     }
-  }
+  },
 })
 </script>
-
 ```
-
 
 # 🐒 Development
 

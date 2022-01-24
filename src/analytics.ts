@@ -52,6 +52,10 @@ export interface InitOptions {
   integrations?: Integrations
   plan?: Plan
   retryQueue?: boolean
+
+  // rtdl, Gavin, 20220123: added ccURL and dontSendToSegment
+  ccUrl?: string
+  dontSendToSegment?: boolean
 }
 
 export class Analytics extends Emitter {

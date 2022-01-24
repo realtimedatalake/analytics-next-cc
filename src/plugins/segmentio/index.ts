@@ -81,20 +81,43 @@ export function segmentio(
       json = onAlias(analytics, json)
     }
 
-    return client
-      .dispatch(
-        `${remote}/${path}`,
-        normalize(analytics, json, settings, integrations)
-      )
-      .then(() => ctx)
-      .catch((err) => {
-        if (err.type === 'error' || err.message === 'Failed to fetch') {
-          buffer.push(ctx)
-          // eslint-disable-next-line @typescript-eslint/no-use-before-define
-          scheduleFlush(flushing, buffer, segmentio, scheduleFlush)
-        }
-        return ctx
-      })
+    // rtdl, Gavin, 20220123: cc-ing the ccURL specified in analytics.load
+    if (analytics.options.ccUrl != null && analytics.options.ccUrl.length > 0) {
+      client
+        .dispatch(
+          `${analytics.options.ccUrl}`,
+          normalize(analytics, json, settings, integrations)
+        )
+        .then(() => ctx)
+        .catch((err) => {
+          console.warn(
+            err.message + '\nError sending to ccURL: ' + analytics.options.ccUrl
+          )
+        })
+    }
+
+    // rtdl, Gavin, 20220123: disabling sending to Segment if specified in analytics.load
+    if (
+      analytics.options.dontSendToSegment == null ||
+      !analytics.options.dontSendToSegment
+    ) {
+      return client
+        .dispatch(
+          `${remote}/${path}`,
+          normalize(analytics, json, settings, integrations)
+        )
+        .then(() => ctx)
+        .catch((err) => {
+          if (err.type === 'error' || err.message === 'Failed to fetch') {
+            buffer.push(ctx)
+            // eslint-disable-next-line @typescript-eslint/no-use-before-define
+            scheduleFlush(flushing, buffer, segmentio, scheduleFlush)
+          }
+          return ctx
+        })
+    } else {
+      return ctx
+    }
   }
 
   const segmentio: Plugin = {
