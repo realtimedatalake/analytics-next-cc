@@ -6,9 +6,13 @@ This is a fork of Analytics Next (aka Analytics.js 2.0) made to enable carbon co
 
 - Updated `/src/analytics.ts`
 - Updated `/src/plugins/segmentio/index.ts`
-- Updated `/.eslintrc` -- ignored `/analytics.min.js`
-- Added `/analytics.min.js`
-- Added `/.prettierignore` -- ignored `/analytics.min.js`
+- Updated `/.gitignore` -- restricted `dist` ignore to its individual subfolders
+- Added `/dist/analytics.min.js`
+- Added `/dist/index.js`
+- Added `/dist/index.js.map`
+- Added `/dist/standalone.js`
+- Added `/dist/standalone.js.map`
+- Added `/.prettierignore` -- ignored `/dist/`
 
 ## How to Build
 
@@ -27,7 +31,13 @@ This is a fork of Analytics Next (aka Analytics.js 2.0) made to enable carbon co
     ...
     ```
 5.  Copy the minified standalone file to repo root
-    `% cp -p ./dist/umd/standalone.js ./analytics.min.js`
+    ```
+    % cp -p ./dist/umd/standalone.js ./dist/analytics.min.js
+    % cp -p ./dist/umd/standalone.js ./dist/
+    % cp -p ./dist/umd/standalone.js.map ./dist/
+    % cp -p ./dist/umd/index.js ./dist/
+    % cp -p ./dist/umd/index.js.map ./dist/
+    ```
 
 ---
 

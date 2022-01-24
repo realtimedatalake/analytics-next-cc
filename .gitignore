@@ -1,5 +1,7 @@
 /node_modules/
-/dist/
+/dist/cjs/
+/dist/pkg/
+/dist/umd/
 .DS_Store
 *.log
 stats.json
