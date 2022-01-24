@@ -8,6 +8,7 @@ This is a fork of Analytics Next (aka Analytics.js 2.0) made to enable carbon co
 - Updated `/src/plugins/segmentio/index.ts`
 - Updated `/.eslintrc` -- ignored `/analytics.min.js`
 - Added `/analytics.min.js`
+- Added `/.prettierignore` -- ignored `/analytics.min.js`
 
 ## How to Build
 
