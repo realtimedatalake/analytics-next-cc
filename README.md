@@ -26,7 +26,7 @@ This is a fork of Analytics Next (aka Analytics.js 2.0) made to enable carbon co
     ...
     ```
 5.  Copy the minified standalone file to repo root
-    `% cp ./dist/umd/standalone.js ./analytics.min.js`
+    `% cp -p ./dist/umd/standalone.js ./analytics.min.js`
 
 ---
 
