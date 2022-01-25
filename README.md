@@ -30,13 +30,10 @@ This is a fork of Analytics Next (aka Analytics.js 2.0) made to enable carbon co
     % make build-prod
     ...
     ```
-5.  Copy the minified standalone file to repo root
+5.  Copy the UMD files to the dist folder
     ```
     % cp -p ./dist/umd/standalone.js ./dist/analytics.min.js
-    % cp -p ./dist/umd/standalone.js ./dist/
-    % cp -p ./dist/umd/standalone.js.map ./dist/
-    % cp -p ./dist/umd/index.js ./dist/
-    % cp -p ./dist/umd/index.js.map ./dist/
+    % cp -p ./dist/umd/standalone.js ./dist/umd/standalone.js.map ./dist/umd/index.js ./dist/umd/index.js.map ./dist/
     ```
 
 ---
