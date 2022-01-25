@@ -1,6 +1,67 @@
-# rtdl-next-cc - Analytics Next (aka Analytics.js 2.0) Carbon Copy
+# analytics-next-cc - Analytics Next (aka Analytics.js 2.0) Carbon Copy
 
-This is a fork of Analytics Next (aka Analytics.js 2.0) made to enable carbon copying (cc-ing) an additional endpoint as well as turning off the send to Segment and only sending to the cc endpoint.
+This is a fork of Analytics Next (aka Analytics.js 2.0) made to enable carbon copying (cc-ing) an additional endpoint as well as turning off the send to Segment and only sending to the cc endpoint. This is a drop-in replacement for Segment's Analytics Next.
+
+## How to Use
+
+### Standard Segment Analytics Next Snippet
+
+```
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="[your_write_key]";;analytics.SNIPPET_VERSION="4.15.3";
+  analytics.load("[your_write_key]");
+  analytics.page();
+  }}();
+</script>
+```
+
+### analytics-next-cc Snippet
+
+For `analytics-next-cc`, you just need to replace `t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js"` in the above snippet with `t.src="https://rawcdn.githack.com/realtimedatalake/analytics-next-cc/ceb342616ddd292348bdce221dc4b8fe3d7dd742/dist/analytics.min.js"`.
+
+#### cc and send to Segment
+
+```
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://rawcdn.githack.com/realtimedatalake/analytics-next-cc/ceb342616ddd292348bdce221dc4b8fe3d7dd742/dist/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="[your_write_key]";;analytics.SNIPPET_VERSION="4.15.3";
+  analytics.load("[your_write_key]", { ccUrl: "http://localhost:8080/ingest", dontSendToSegment: false });
+  analytics.page();
+  }}();
+</script>
+```
+
+#### cc and don't send to Segment
+
+```
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://rawcdn.githack.com/realtimedatalake/analytics-next-cc/ceb342616ddd292348bdce221dc4b8fe3d7dd742/dist/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="[your_write_key]";;analytics.SNIPPET_VERSION="4.15.3";
+  analytics.load("[your_write_key]", { ccUrl: "http://localhost:8080/ingest", dontSendToSegment: true });
+  analytics.page();
+  }}();
+</script>
+```
+
+#### No cc and send to Segment
+
+```
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://rawcdn.githack.com/realtimedatalake/analytics-next-cc/ceb342616ddd292348bdce221dc4b8fe3d7dd742/dist/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="[your_write_key]";;analytics.SNIPPET_VERSION="4.15.3";
+  analytics.load("[your_write_key]");
+  analytics.page();
+  }}();
+</script>
+```
+
+#### No cc and don't send to Segment
+
+```
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://rawcdn.githack.com/realtimedatalake/analytics-next-cc/ceb342616ddd292348bdce221dc4b8fe3d7dd742/dist/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="[your_write_key]";;analytics.SNIPPET_VERSION="4.15.3";
+  analytics.load("[your_write_key]", { dontSendToSegment: true });
+  analytics.page();
+  }}();
+</script>
+```
 
 ## Changed Files
 
