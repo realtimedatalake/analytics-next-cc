@@ -2,6 +2,10 @@
 
 This is a fork of Analytics Next (aka Analytics.js 2.0) made to enable carbon copying (cc-ing) an additional endpoint as well as turning off the send to Segment and only sending to the cc endpoint. This is a drop-in replacement for Segment's Analytics Next.
 
+## rtdl - The Real-Time Data Lake
+This is a sub-project of [rtdl](https://github.com/realtimedatalake/rtdl) – the real-time 
+data lake. Please go to rtdl's repo and give it a star.
+
 ## How to Use
 
 ### Standard Segment Analytics Next Snippet
